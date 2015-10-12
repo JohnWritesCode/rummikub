@@ -1,6 +1,6 @@
 __author__ = 'johnthompson'
 from unittest import TestCase
-from playables import RummikubPlayedSet, Run, PartialRun, Group, PartialGroup
+from tileGroupings import RummikubPlayedSet, Run, PartialRun, Group, PartialGroup
 
 class TestBaseClass(TestCase):
     pairs = [
@@ -44,6 +44,10 @@ class TestRuns(TestCase):
         self.assertEqual(len(self.run1), 0)
         self.assertEqual(len(self.run2), 3)
         self.assertEqual(len(self.run3), 4)
+
+    def test_get_tiles(self):
+        self.assertEqual( self.run1.getTiles(), None)
+        self.assertEqual( self.run4.getTiles(),['1yw', '2yw', '3yw', '4yw', '5yw', '6yw', '7yw'])
 
     def test_equality(self):
         tmp = Run( ['5rd', '6rd','7rd', '8rd'])
@@ -132,6 +136,10 @@ class TestGroup(TestCase):
         g = self.group2.clone()
         g.addTile('13rd')
         self.assertEqual(len(self.group2),3)
+
+    def test_get_tiles(self):
+        self.assertEqual(self.group1.getTiles(), None)
+        self.assertEqual(set(self.group2.getTiles()), set(['13bk','13bl', '13yw']))
 
     def test_length(self):
         self.assertEqual(len(self.group1), 0)
