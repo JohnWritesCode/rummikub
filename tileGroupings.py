@@ -1,6 +1,15 @@
 __author__ = 'johnthompson'
 import re
 
+def getGrouping(tiles):
+    try:
+        return Run(tiles)
+    except ValueError:
+        try:
+            return Group(tiles)
+        except ValueError:
+            raise ValueError("could not make a grouping out of '%s'" % str(tiles))
+
 class RummikubPlayedSet(object):
     tileRE = re.compile(r'(\d{1,2})(\w{2})')
     colorMap = {
